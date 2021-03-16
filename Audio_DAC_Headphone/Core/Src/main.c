@@ -49,11 +49,8 @@ DMA_HandleTypeDef hdma_spi3_tx;
 
 TIM_HandleTypeDef htim2;
 
-UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-#define PI 3.14159f
-
 //Sample rate and Op freq
 #define SAMPLE_FREQ		50000.0f
 #define OP_FREQ			1000.0f
@@ -80,7 +77,6 @@ float ref_noise;
 float noise_mySignal;
 float result_mySignal;
 float sample_dt;
-
 float adap_idx_0 = 0.0;
 float delayed_idx_1 = 0.0;
 float adap_idx_1 = 0.0;
@@ -89,16 +85,11 @@ float a;
 uint8_t flag;
 
 uint16_t sample_N;
-uint16_t i_t;
-uint16_t dac_op_val;
 
 int16_t I2S_buff[4];
-
 //Push btn flag
 uint8_t btn_pused;
 /* USER CODE END 0 */
-
-/**
   * @brief  The application entry point.
   * @retval int
   */
