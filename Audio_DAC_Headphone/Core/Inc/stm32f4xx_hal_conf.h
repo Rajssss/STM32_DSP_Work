@@ -63,7 +63,11 @@
 /* #define HAL_MMC_MODULE_ENABLED   */
 /* #define HAL_SPI_MODULE_ENABLED   */
 #define HAL_TIM_MODULE_ENABLED
+<<<<<<< HEAD
 #define HAL_UART_MODULE_ENABLED
+=======
+/* #define HAL_UART_MODULE_ENABLED   */
+>>>>>>> branch 'main' of https://github.com/Rajssss/STM32_DSP_Work
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
 /* #define HAL_SMARTCARD_MODULE_ENABLED   */

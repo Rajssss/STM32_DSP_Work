@@ -28,6 +28,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+<<<<<<< HEAD
 #include "stm32f4xx_hal.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -35,6 +36,15 @@ extern "C" {
 #include <math.h>
 #include "custom_cs43l22.h"
 #include "retarget_stdio.h"
+=======
+#include <math.h>
+#include "stm32f4xx_hal.h"
+#include "custom_cs43l22.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+>>>>>>> branch 'main' of https://github.com/Rajssss/STM32_DSP_Work
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

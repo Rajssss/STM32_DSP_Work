@@ -361,6 +361,7 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 
 }
 
+<<<<<<< HEAD
 /**
 * @brief UART MSP Initialization
 * This function configures the hardware resources used in this example
@@ -426,6 +427,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
 }
 
+=======
+>>>>>>> branch 'main' of https://github.com/Rajssss/STM32_DSP_Work
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
