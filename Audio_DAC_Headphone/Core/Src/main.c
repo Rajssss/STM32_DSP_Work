@@ -49,6 +49,8 @@ DMA_HandleTypeDef hdma_spi3_tx;
 
 TIM_HandleTypeDef htim2;
 
+UART_HandleTypeDef huart2;
+
 /* USER CODE BEGIN PV */
 #define PI 3.14159f
 
@@ -65,6 +67,7 @@ static void MX_I2C1_Init(void);
 static void MX_I2S3_Init(void);
 static void MX_DAC_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -82,6 +85,8 @@ float adap_idx_0 = 0.0;
 float delayed_idx_1 = 0.0;
 float adap_idx_1 = 0.0;
 float a;
+
+uint8_t flag;
 
 uint16_t sample_N;
 uint16_t i_t;
@@ -127,7 +132,9 @@ int main(void)
   MX_I2S3_Init();
   MX_DAC_Init();
   MX_TIM2_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  RetargetInit();
   //Initialize and start CS43L22
   CS43_Init(hi2c1, MODE_ANALOGX);
   CS43_SetVolume(5);
@@ -142,6 +149,8 @@ int main(void)
 
   //Start Timer 2
   HAL_TIM_Base_Start_IT(&htim2);
+  printf("All Initialized!");
+  //HAL_UART_Transmit(&huart2, (uint8_t *)"Ho gya!\r\n", 9, HAL_MAX_DELAY);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -358,6 +367,39 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -395,7 +437,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PA0 */
   GPIO_InitStruct.Pin = GPIO_PIN_0;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -434,15 +476,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    delayed_idx_1 = ref_noise;
 
 		//convert from float to decimal
-	    if(btn_pused == 1)
-	    {
-	    	dac_op_val = (noise_mySignal + 1) * 127;
-	    }
-	    else
-	    {
-	    	dac_op_val = (result_mySignal + 1) * 127;
-	    }
-
+//	    if(flag == 1)
+//	    {
+//	    	dac_op_val = (mySignal + 1) * 127;
+//	    }
+//	    else if(flag == 2)
+//	    {
+//	    	dac_op_val = (noise_mySignal + 1) * 127;
+//	    }
+//	    else
+//	    {
+//	    	dac_op_val = (noise_mySignal + 1) * 127;
+//	    }
+	    dac_op_val = (mySignal + 1) * 127;
 		//op the sample to STM DAC
 		HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_8B_R, dac_op_val);
 

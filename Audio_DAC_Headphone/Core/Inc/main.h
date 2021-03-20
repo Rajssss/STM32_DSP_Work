@@ -34,6 +34,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include <math.h>
 #include "custom_cs43l22.h"
+#include "retarget_stdio.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
